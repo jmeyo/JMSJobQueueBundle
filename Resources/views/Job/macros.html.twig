@@ -1,18 +1,18 @@
 {% macro state(job) -%}
     {% if job.new -%}
-        <span class="label">New</span>
+        <span class="label label-default">New</span>
     {%- elseif job.pending -%}
-        <span class="label">Pending</span>
+        <span class="label label-default">Pending</span>
     {%- elseif job.running -%}
         <span class="label label-info">Running</span>
     {%- elseif job.canceled -%}
-        <span class="label label-inverse">Canceled</span>
+        <span class="label label-danger">Canceled</span>
     {%- elseif job.terminated -%}
-        <span class="label label-important">Terminated</span>
+        <span class="label label-primary">Terminated</span>
     {%- elseif job.failed -%}
-        <span class="label label-important">Failed</span>
+        <span class="label label-primary">Failed</span>
     {%- elseif job.incomplete -%}
-        <span class="label label-important">Incomplete</span>
+        <span class="label label-primary">Incomplete</span>
     {%- elseif job.finished -%}
         <span class="label label-success">Finished</span>
     {%- else -%}
@@ -20,8 +20,8 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro command(job) -%}
-    <code style="width:300px; overflow:hidden; white-space:nowrap;">{{ job.command }} {{ job.args|jms_job_queue_args }}</code>
+{% macro command(job, size=60) -%}
+    <code style="width:300px; overflow:hidden; white-space:nowrap;">{{ job.command }} {{ job.args|jms_job_queue_args(size) }}</code>
 {%- endmacro %}
 
 {% macro ago(time, format) -%}
